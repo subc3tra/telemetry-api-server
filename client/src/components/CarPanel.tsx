@@ -29,8 +29,8 @@ function tempColor(temp: number): string {
 }
 
 function wearColor(wear: number): string {
-  if (wear < 0.2) return '#00ff88';
-  if (wear < 0.5) return '#ffcc00';
+  if (wear < 20) return '#00ff88';
+  if (wear < 50) return '#ffcc00';
   return '#ff3333';
 }
 
@@ -87,7 +87,7 @@ function TyreCorner({ label, surface, carcass, inside, middle, outside, pressure
         </div>
         <div className="corner-row">
           <span className="corner-key">WEAR</span>
-          <span className="corner-val" style={{ color: wearColor(wear) }}>{(wear * 100).toFixed(1)}%</span>
+          <span className="corner-val" style={{ color: wearColor(wear) }}>{wear.toFixed(3)}%</span>
         </div>
         <div className="corner-row">
           <span className="corner-key">DAMAGE</span>

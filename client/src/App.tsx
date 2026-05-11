@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useTelemetry } from './hooks/useTelemetry';
-import { useStint } from './hooks/useStint';
 import { LiveTiming } from './components/LiveTiming';
 import { CarPanel } from './components/CarPanel';
 import { StintPanel } from './components/StintPanel';
@@ -26,8 +25,7 @@ function StatusDot({ status }: { status: string }) {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('timing');
-  const { telemetry, aiData, status } = useTelemetry();
-  const stintInfo = useStint(telemetry);
+  const { telemetry, aiData, stintData, status } = useTelemetry();
 
   return (
     <div className="app">
@@ -50,7 +48,7 @@ export default function App() {
       <main className="main">
         {activeTab === 'timing' && <LiveTiming aiData={aiData} />}
         {activeTab === 'car'    && <CarPanel telemetry={telemetry} />}
-        {activeTab === 'stint'  && <StintPanel stintInfo={stintInfo} />}
+        {activeTab === 'stint'  && <StintPanel stintData={stintData} />}
       </main>
     </div>
   );

@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import type { AiDriver, TelemetryPacket, WsMessage } from '../types';
+import type { AiDriver, StintData, TelemetryPacket, WsMessage } from '../types';
 
 type ConnectionStatus = 'connecting' | 'connected' | 'disconnected';
+
+const EMPTY_STINT_DATA: StintData = { current: null, completed: [], totalPitTimeMs: 0 };
 
 export function useTelemetry() {
   const [telemetry, setTelemetry] = useState<TelemetryPacket | null>(null);
   const [aiData, setAiData] = useState<AiDriver[] | null>(null);
+  const [stintData, setStintData] = useState<StintData>(EMPTY_STINT_DATA);
   const [status, setStatus] = useState<ConnectionStatus>('connecting');
   const wsRef = useRef<WebSocket | null>(null);
 
@@ -24,6 +27,7 @@ export function useTelemetry() {
         const msg: WsMessage = JSON.parse(event.data);
         setTelemetry(msg.latestTelemetry);
         setAiData(msg.latestAiData);
+        setStintData(msg.stintData ?? EMPTY_STINT_DATA);
       };
 
       ws.onclose = () => {
@@ -43,5 +47,5 @@ export function useTelemetry() {
     };
   }, []);
 
-  return { telemetry, aiData, status };
+  return { telemetry, aiData, stintData, status };
 }

@@ -497,11 +497,18 @@ body {
 
 /* ── Stint Panel ── */
 
+.stint-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
 .stint-panel {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 700px;
+  flex: 1;
+  min-width: 0;
 }
 
 .stint-header-row {
@@ -624,4 +631,83 @@ body {
 .wear-rate {
   font-size: 13px;
   color: var(--text-dim);
+}
+
+/* ── Stint history (right panel) ── */
+
+.stint-history {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.sh-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  margin-bottom: 8px;
+}
+
+.sh-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 10px;
+}
+
+.sh-entry {
+  display: flex;
+  gap: 6px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+  color: var(--text-dim);
+}
+
+.sh-entry--active {
+  color: var(--text);
+}
+
+.sh-marker {
+  font-size: 10px;
+  color: var(--green);
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.sh-entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.sh-stint-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.sh-stint-label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.sh-duration {
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
+
+.sh-laps {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.sh-pit-time {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.sh-pit-time--active {
+  color: var(--yellow);
 }

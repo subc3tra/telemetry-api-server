@@ -183,7 +183,48 @@ export interface AiDriver {
   tyre: string;
 }
 
+// --- Stint Data (server-computed) ---
+
+export interface StintCorners {
+  fl: number; fr: number; rl: number; rr: number;
+}
+
+export interface CompletedStint {
+  stintNumber: number;
+  startLap: number;
+  endLap: number;
+  durationMs: number;
+  pitDurationMs: number;
+  tyreSet: number;
+}
+
+export interface CurrentStint {
+  stintNumber: number;
+  tyreSet: number;
+  startLap: number;
+  currentLap: number;
+  durationMs: number;
+  inPits: boolean;
+  currentPitDurationMs: number;
+  avgSpeed: number;
+  maxSpeed: number;
+  distanceM: number;
+  fuelUsed: number;
+  fuelPerLap: number;
+  nrgUsed: number;
+  nrgPerLap: number;
+  pressures: { start: StintCorners; now: StintCorners; avg: StintCorners };
+  wear: { now: StintCorners; perLap: StintCorners };
+}
+
+export interface StintData {
+  current: CurrentStint | null;
+  completed: CompletedStint[];
+  totalPitTimeMs: number;
+}
+
 export interface WsMessage {
   latestTelemetry: TelemetryPacket | null;
   latestAiData: AiDriver[] | null;
+  stintData: StintData;
 }
