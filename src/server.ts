@@ -56,6 +56,7 @@ setInterval(async () => {
   const telemetryData = await fetchTelemetry<TelemetryPacket>('/JSON/telemetrypacket');
   const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
   latestTelemetry = telemetryData;
+  latestAiData = aiData;
 }, 200);
 
 
