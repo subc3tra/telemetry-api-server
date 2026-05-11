@@ -287,3 +287,8 @@ export interface AiDriver {
   // Tyre
   tyre: string;
 }
+
+export interface WsMessage {
+  telemetry: TelemetryPacket | null;
+  aidata: AiDriver[] | null;
+}
