@@ -1,6 +1,7 @@
 import http from 'http';
 import { TelemetryPacket, AiDriver } from './types';
 import express from 'express';
+import path from 'path';
 
 const app = express();
 
@@ -24,6 +25,10 @@ app.get('/api/aidata', async (_req, res) => {
   const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
   res.status(200).json(aiData);
 });
+
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+})
 
 function fetchTelemetry<T>(path: string): Promise<T | null> {
 
@@ -70,12 +75,6 @@ function fetchTelemetry<T>(path: string): Promise<T | null> {
   })
 }
 
-async function main() {
-  const telemetryPacket = await fetchTelemetry<TelemetryPacket>('/JSON/telemetrypacket');
-  const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
-  console.log(telemetryPacket);
-  console.log(aiData);
-}
 
 app.listen(3000, () => {
   console.log('Server is running!')
