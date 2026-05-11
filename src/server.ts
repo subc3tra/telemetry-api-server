@@ -21,8 +21,8 @@ app.get('/api/telemetry', async (_req, res) => {
 });
 
 app.get('/api/aidata', async (_req, res) => {
-  const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
-  res.status(200).json(aiData);
+  
+  res.status(200).json(latestAiData);
 });
 
 app.get('*', (_req, res) => {
@@ -32,9 +32,11 @@ app.get('*', (_req, res) => {
 /** Function will be separetade later */
 
 let latestTelemetry: TelemetryPacket | null = null;
+let latestAiData: AiDriver[] | null = null
 
 setInterval(async () => {
   const telemetryData = await fetchTelemetry<TelemetryPacket>('/JSON/telemetrypacket');
+  const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
   latestTelemetry = telemetryData;
 }, 200);
 
