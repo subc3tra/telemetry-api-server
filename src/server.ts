@@ -57,6 +57,13 @@ setInterval(async () => {
   const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
   latestTelemetry = telemetryData;
   latestAiData = aiData;
+
+  enginners.forEach(ws => {
+    ws.send(JSON.stringify({
+      latestTelemetry,
+      latestAiData
+    }));
+  });
 }, 200);
 
 
