@@ -1,0 +1,530 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #161616;
+  --border: #2a2a2a;
+  --text: #cccccc;
+  --text-dim: #666;
+  --green: #00ff88;
+  --yellow: #ffcc00;
+  --red: #ff3333;
+  --blue: #4fc3f7;
+  --font-mono: 'Courier New', Courier, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Layout ── */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  height: 48px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.header-title {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: var(--green);
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* ── Tabs ── */
+
+.tab-nav {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.tab-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.tab-btn--active {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* ── Status indicator ── */
+
+.status-dot-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-text {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+/* ── No data ── */
+
+.no-data {
+  color: var(--text-dim);
+  padding: 2rem;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* ── Live Timing ── */
+
+.timing-table-wrap {
+  overflow-x: auto;
+}
+
+.timing-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.timing-table th {
+  text-align: left;
+  padding: 6px 12px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+
+.timing-table td {
+  padding: 6px 12px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.timing-table tbody tr:hover {
+  background: #1a1a1a;
+}
+
+.row-out {
+  opacity: 0.4;
+}
+
+.col-pos {
+  font-weight: bold;
+  color: var(--green);
+  font-size: 14px;
+  width: 40px;
+}
+
+.col-number {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.col-driver {
+  min-width: 160px;
+}
+
+.tla {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.full-name {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.col-class {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.col-gap {
+  color: var(--yellow);
+}
+
+.col-laptime {
+  font-family: var(--font-mono);
+}
+
+.col-tyre {
+  font-size: 11px;
+}
+
+.col-status {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.status-racing { color: var(--green); }
+.status-pit    { color: var(--yellow); }
+.status-out    { color: var(--red); }
+
+/* ── Driver Panel ── */
+
+.driver-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+}
+
+.driver-top-row {
+  display: flex;
+  gap: 2rem;
+  align-items: baseline;
+}
+
+.big-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.big-value {
+  font-size: 52px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.big-unit {
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+.gear-box {
+  border: 2px solid var(--border);
+  padding: 0.5rem 1.5rem;
+}
+
+.gear-value {
+  color: var(--green);
+  font-size: 64px;
+}
+
+.rpm-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rpm-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rpm-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.1s linear, background 0.2s;
+}
+
+.rpm-bar-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* ── Inputs ── */
+
+.inputs-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input-label {
+  width: 70px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.input-bar-bg {
+  flex: 1;
+  height: 14px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.input-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.08s linear;
+}
+
+.input-bar-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #000;
+  mix-blend-mode: difference;
+}
+
+.steer-bar {
+  flex: 1;
+  height: 14px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  position: relative;
+}
+
+.steer-indicator {
+  position: absolute;
+  top: 2px;
+  width: 4px;
+  height: 10px;
+  background: var(--yellow);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: left 0.05s linear;
+}
+
+/* ── Info grid ── */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background: var(--surface);
+}
+
+.info-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ── G-forces ── */
+
+.gforce-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.gforce-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gforce-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+.gforce-value {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ── Tyre Panel ── */
+
+.tyre-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tyre-compound-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tyre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 700px;
+}
+
+.tyre-corner {
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.tyre-corner-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.tyre-temps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tyre-temp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tyre-temp-key {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.tyre-temp-val {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.tyre-temp-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* ── Brake / Suspension Panel ── */
+
+.brake-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.corner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 700px;
+}
+
+.corner-card {
+  background: var(--surface);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.corner-card-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.corner-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.corner-stat-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.corner-stat-value {
+  font-weight: bold;
+}
+
+.corner-stat-unit {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-left: 2px;
+}
+
+.ride-height-row {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 700px;
+}
+
+.ride-height-row .info-card {
+  flex: 1;
+}

@@ -18,7 +18,7 @@ wss.on('connection', (ws) => {
   console.log('Enginner connected');
   enginners.push(ws);
 
-  wss.on('close', () => {
+  ws.on('close', () => {
     const index = enginners.indexOf(ws);
     if (index !== -1) {
       enginners.splice(index, 1);
