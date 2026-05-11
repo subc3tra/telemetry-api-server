@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import { useTelemetry } from './hooks/useTelemetry';
 import { LiveTiming } from './components/LiveTiming';
-import { DriverPanel } from './components/DriverPanel';
-import { TyrePanel } from './components/TyrePanel';
-import { BrakePanel } from './components/BrakePanel';
+import { CarPanel } from './components/CarPanel';
 import './App.css';
 
-type Tab = 'timing' | 'driver' | 'tyres' | 'brakes';
+type Tab = 'timing' | 'car';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'timing', label: 'LIVE TIMING' },
-  { id: 'driver', label: 'DRIVER' },
-  { id: 'tyres', label: 'TYRES' },
-  { id: 'brakes', label: 'BRAKES & SUSP' },
+  { id: 'car', label: 'CAR' },
 ];
 
 function StatusDot({ status }: { status: string }) {
@@ -49,9 +45,7 @@ export default function App() {
 
       <main className="main">
         {activeTab === 'timing' && <LiveTiming aiData={aiData} />}
-        {activeTab === 'driver' && <DriverPanel telemetry={telemetry} />}
-        {activeTab === 'tyres' && <TyrePanel telemetry={telemetry} />}
-        {activeTab === 'brakes' && <BrakePanel telemetry={telemetry} />}
+        {activeTab === 'car' && <CarPanel telemetry={telemetry} />}
       </main>
     </div>
   );

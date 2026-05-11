@@ -9,7 +9,7 @@
   --surface: #161616;
   --border: #2a2a2a;
   --text: #cccccc;
-  --text-dim: #666;
+  --text-dim: #777;
   --green: #00ff88;
   --yellow: #ffcc00;
   --red: #ff3333;
@@ -21,9 +21,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 13px;
-  height: 100vh;
-  overflow: hidden;
+  font-size: 14px;
 }
 
 /* ── Layout ── */
@@ -71,9 +69,9 @@ body {
   border: 1px solid transparent;
   color: var(--text-dim);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
-  padding: 4px 12px;
+  padding: 4px 14px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
 }
@@ -104,7 +102,7 @@ body {
 }
 
 .status-text {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: var(--text-dim);
 }
@@ -132,16 +130,17 @@ body {
 
 .timing-table th {
   text-align: left;
-  padding: 6px 12px;
-  font-size: 10px;
-  letter-spacing: 2px;
+  padding: 7px 14px;
+  font-size: 12px;
+  letter-spacing: 1px;
   color: var(--text-dim);
   border-bottom: 1px solid var(--border);
 }
 
 .timing-table td {
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-bottom: 1px solid #1a1a1a;
+  font-size: 14px;
 }
 
 .timing-table tbody tr:hover {
@@ -155,17 +154,17 @@ body {
 .col-pos {
   font-weight: bold;
   color: var(--green);
-  font-size: 14px;
+  font-size: 16px;
   width: 40px;
 }
 
 .col-number {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .col-driver {
-  min-width: 160px;
+  min-width: 180px;
 }
 
 .tla {
@@ -175,11 +174,11 @@ body {
 
 .full-name {
   color: var(--text-dim);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .col-class {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: var(--text-dim);
 }
@@ -193,11 +192,11 @@ body {
 }
 
 .col-tyre {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .col-status {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
 }
 
@@ -205,25 +204,57 @@ body {
 .status-pit    { color: var(--yellow); }
 .status-out    { color: var(--red); }
 
-/* ── Driver Panel ── */
+/* ── Car Panel layout ── */
 
-.driver-panel {
+.car-panel {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 800px;
 }
+
+.car-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.car-bottom-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.car-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.car-section-title {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+}
+
+.car-bottom-strip {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+/* ── Driver inputs ── */
 
 .driver-top-row {
   display: flex;
   gap: 2rem;
-  align-items: baseline;
+  align-items: center;
 }
 
 .big-stat {
   display: flex;
   align-items: baseline;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .big-value {
@@ -234,30 +265,31 @@ body {
 }
 
 .big-unit {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-dim);
   letter-spacing: 2px;
 }
 
 .gear-box {
   border: 2px solid var(--border);
-  padding: 0.5rem 1.5rem;
+  padding: 0.25rem 1.25rem;
 }
 
 .gear-value {
   color: var(--green);
-  font-size: 64px;
+  font-size: 60px;
 }
 
 .rpm-bar-wrap {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex: 1;
 }
 
 .rpm-bar-bg {
   flex: 1;
-  height: 8px;
+  height: 10px;
   background: #1a1a1a;
   border-radius: 2px;
   overflow: hidden;
@@ -270,17 +302,15 @@ body {
 }
 
 .rpm-bar-label {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-dim);
   white-space: nowrap;
 }
 
-/* ── Inputs ── */
-
 .inputs-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .input-row {
@@ -290,8 +320,8 @@ body {
 }
 
 .input-label {
-  width: 70px;
-  font-size: 10px;
+  width: 80px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: var(--text-dim);
   flex-shrink: 0;
@@ -299,7 +329,7 @@ body {
 
 .input-bar-bg {
   flex: 1;
-  height: 14px;
+  height: 16px;
   background: #1a1a1a;
   border-radius: 2px;
   overflow: hidden;
@@ -317,14 +347,14 @@ body {
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 10px;
+  font-size: 11px;
   color: #000;
   mix-blend-mode: difference;
 }
 
 .steer-bar {
   flex: 1;
-  height: 14px;
+  height: 16px;
   background: #1a1a1a;
   border-radius: 2px;
   position: relative;
@@ -332,7 +362,7 @@ body {
 
 .steer-indicator {
   position: absolute;
-  top: 2px;
+  top: 3px;
   width: 4px;
   height: 10px;
   background: var(--yellow);
@@ -345,7 +375,7 @@ body {
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -354,19 +384,19 @@ body {
 .info-card {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   padding: 10px 12px;
   background: var(--surface);
 }
 
 .info-label {
-  font-size: 9px;
-  letter-spacing: 2px;
+  font-size: 12px;
+  letter-spacing: 1px;
   color: var(--text-dim);
 }
 
 .info-value {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -374,11 +404,12 @@ body {
   font-family: var(--font-mono);
 }
 
-/* ── G-forces ── */
+/* ── G-forces / stat strip ── */
 
 .gforce-row {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .gforce-item {
@@ -388,143 +419,63 @@ body {
 }
 
 .gforce-label {
-  font-size: 9px;
-  letter-spacing: 2px;
+  font-size: 12px;
+  letter-spacing: 1px;
   color: var(--text-dim);
 }
 
 .gforce-value {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 }
 
-/* ── Tyre Panel ── */
+/* ── Four-corner grid (tyres and brakes) ── */
 
-.tyre-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.tyre-compound-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.tyre-grid {
+.four-corner-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
-  max-width: 700px;
 }
 
-.tyre-corner {
+.corner-block {
   background: var(--surface);
-  padding: 1rem;
+  padding: 0.875rem 1rem;
 }
 
-.tyre-corner-label {
-  font-size: 10px;
+.corner-block-label {
+  font-size: 12px;
   letter-spacing: 2px;
   color: var(--text-dim);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
-.tyre-temps {
+.corner-block-rows {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.tyre-temp-row {
+.corner-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.tyre-temp-key {
-  font-size: 10px;
+.corner-key {
+  font-size: 12px;
   color: var(--text-dim);
   letter-spacing: 1px;
 }
 
-.tyre-temp-val {
+.corner-val {
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
 }
 
-.tyre-temp-divider {
+.corner-divider {
   height: 1px;
   background: var(--border);
-  margin: 4px 0;
-}
-
-/* ── Brake / Suspension Panel ── */
-
-.brake-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.corner-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  max-width: 700px;
-}
-
-.corner-card {
-  background: var(--surface);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.corner-card-label {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--text-dim);
-  margin-bottom: 4px;
-}
-
-.corner-stat {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.corner-stat-label {
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-}
-
-.corner-stat-value {
-  font-weight: bold;
-}
-
-.corner-stat-unit {
-  font-size: 10px;
-  color: var(--text-dim);
-  margin-left: 2px;
-}
-
-.ride-height-row {
-  display: flex;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  max-width: 700px;
-}
-
-.ride-height-row .info-card {
-  flex: 1;
+  margin: 3px 0;
 }
