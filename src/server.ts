@@ -17,8 +17,7 @@ app.get('/api/health', async (_req, res) => {
 })
 
 app.get('/api/telemetry', async (_req, res) => {
- const telemetryData = await fetchTelemetry<TelemetryPacket>('/JSON/telemetrypacket');
- res.status(200).json(telemetryData);
+  res.status(200).json(latestTelemetry);
 });
 
 app.get('/api/aidata', async (_req, res) => {
@@ -28,7 +27,17 @@ app.get('/api/aidata', async (_req, res) => {
 
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-})
+});
+
+/** Function will be separetade later */
+
+let latestTelemetry: TelemetryPacket | null = null;
+
+setInterval(async () => {
+  const telemetryData = await fetchTelemetry<TelemetryPacket>('/JSON/telemetrypacket');
+  latestTelemetry = telemetryData;
+}, 200);
+
 
 function fetchTelemetry<T>(path: string): Promise<T | null> {
 
