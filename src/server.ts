@@ -1,7 +1,29 @@
 import http from 'http';
 import { TelemetryPacket, AiDriver } from './types';
+import express from 'express';
 
+const app = express();
 
+app.use(express.json());
+app.use(express.static('public'));
+
+/** Routes */
+
+app.get('/api/health', async (_req, res) => {
+  /** Placeholder */
+  console.log('Placeholder for health check');
+  res.status(200).json('Placeholder for health check');
+})
+
+app.get('/api/telemetry', async (_req, res) => {
+ const telemetryData = await fetchTelemetry<TelemetryPacket>('/JSON/telemetrypacket');
+ res.status(200).json(telemetryData);
+});
+
+app.get('/api/aidata', async (_req, res) => {
+  const aiData = await fetchTelemetry<AiDriver[]>('/JSON/aidata');
+  res.status(200).json(aiData);
+});
 
 function fetchTelemetry<T>(path: string): Promise<T | null> {
 
@@ -55,4 +77,6 @@ async function main() {
   console.log(aiData);
 }
 
-main();
+app.listen(3000, () => {
+  console.log('Server is running!')
+});
