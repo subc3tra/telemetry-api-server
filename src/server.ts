@@ -2,11 +2,29 @@ import http from 'http';
 import { TelemetryPacket, AiDriver } from './types';
 import express from 'express';
 import path from 'path';
+import { WebSocketServer, WebSocket } from 'ws';
 
 const app = express();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
 
 app.use(express.json());
 app.use(express.static('public'));
+
+/** Websocket */
+let enginners: WebSocket[] = [];
+
+wss.on('connection', (ws) => {
+  console.log('Enginner connected');
+  enginners.push(ws);
+
+  wss.on('close', () => {
+    const index = enginners.indexOf(ws);
+    if (index !== -1) {
+      enginners.splice(index, 1);
+    }
+  });
+});
 
 /** Routes */
 
@@ -67,7 +85,6 @@ function fetchTelemetry<T>(path: string): Promise<T | null> {
 
         try {
           const parsed = JSON.parse(data) as T;
-          console.log("Data parsed");
           resolve(parsed);
         } catch {
           console.log('Response was not valid JSON');
@@ -87,6 +104,6 @@ function fetchTelemetry<T>(path: string): Promise<T | null> {
 }
 
 
-app.listen(3000, () => {
+server.listen(3000, () => {
   console.log('Server is running!')
 });
