@@ -1,15 +1,16 @@
 import http from 'http';
 import { TelemetryPacket, AiDriver, CompletedStint, CurrentStint, StintData, StintCorners } from './types';
 import express from 'express';
-import path from 'path';
 import { WebSocketServer, WebSocket } from 'ws';
+import routes from './routes';
 
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
 app.use(express.json());
-app.use(express.static('public'));
+
+app.use('/api', routes);
 
 /** Websocket */
 let enginners: WebSocket[] = [];
@@ -26,26 +27,7 @@ wss.on('connection', (ws) => {
   });
 });
 
-/** Routes */
 
-app.get('/api/health', async (_req, res) => {
-  /** Placeholder */
-  console.log('Placeholder for health check');
-  res.status(200).json('Placeholder for health check');
-})
-
-app.get('/api/telemetry', async (_req, res) => {
-  res.status(200).json(latestTelemetry);
-});
-
-app.get('/api/aidata', async (_req, res) => {
-  
-  res.status(200).json(latestAiData);
-});
-
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-});
 
 /** Function will be separetade later */
 
